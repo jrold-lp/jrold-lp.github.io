@@ -1,7 +1,255 @@
-<head>
-</head>
+
+<!DOCTYPE html>
 <html>
+<head>
+  <meta name="viewport" content="user-scalable=0, width=device-width, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0">
+  <title>LivePerson Test Page</title>
+  <link rel="shortcut icon" href="https://supportal.lpnet.com/favicon.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="utilities.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- init qString func -->
+  <script>const urlParams = utils.getQueryStringParams();</script>
+</head>
 <body>
-<h1>Hello World</h1>
+<div class="container">
+  <div class="jumbotron" >
+    <h2 align=center>
+      <strong>LivePerson Test Page Generator</strong>
+    </h2>
+  </div>
+</div>
+
+<!-- inject site ID from qString into monitoring tag-->
+<script type="text/javascript">window.lpTag=window.lpTag||{},"undefined"==typeof window.lpTag._tagCount?(window.lpTag={site:utils.getQueryStringParams()["account"]||"",section:urlParams.sect||lpTag.section||"",tagletSection:lpTag.tagletSection||null,autoStart:lpTag.autoStart!==!1,ovr:lpTag.ovr||!urlParams.alpha?{}:{domain:'lptag-a.liveperson.net',tagjs:'tags-a.liveperson.net'},_v:"1.8.0",_tagCount:1,protocol:"https:",events:{bind:function(t,e,i){lpTag.defer(function(){lpTag.events.bind(t,e,i)},0)},trigger:function(t,e,i){lpTag.defer(function(){lpTag.events.trigger(t,e,i)},1)}},defer:function(t,e){0==e?(this._defB=this._defB||[],this._defB.push(t)):1==e?(this._defT=this._defT||[],this._defT.push(t)):(this._defL=this._defL||[],this._defL.push(t))},load:function(t,e,i){var n=this;setTimeout(function(){n._load(t,e,i)},0)},_load:function(t,e,i){var n=t;t||(n=this.protocol+"//"+(this.ovr&&this.ovr.domain?this.ovr.domain:"lptag.liveperson.net")+"/tag/tag.js?site="+this.site);var a=document.createElement("script");a.setAttribute("charset",e?e:"UTF-8"),i&&a.setAttribute("id",i),a.setAttribute("src",n),document.getElementsByTagName("head").item(0).appendChild(a)},init:function(){this._timing=this._timing||{},this._timing.start=(new Date).getTime();var t=this;window.attachEvent?window.attachEvent("onload",function(){t._domReady("domReady")}):(window.addEventListener("DOMContentLoaded",function(){t._domReady("contReady")},!1),window.addEventListener("load",function(){t._domReady("domReady")},!1)),"undefined"==typeof window._lptStop&&this.load()},start:function(){this.autoStart=!0},_domReady:function(t){this.isDom||(this.isDom=!0,this.events.trigger("LPT","DOM_READY",{t:t})),this._timing[t]=(new Date).getTime()},vars:lpTag.vars||[],dbs:lpTag.dbs||[],ctn:lpTag.ctn||[],sdes:lpTag.sdes||[],hooks:lpTag.hooks||[],ev:lpTag.ev||[]},lpTag.init()):window.lpTag._tagCount+=1;</script>
+<!-- test for presence of DIV_ID and if present print on page -->
+<script type="text/javascript">
+    if (urlParams.divid)
+    {
+        let a = document.createElement('div'), b = document.createElement('div');
+        a.setAttribute('style','border:0px solid #000000; margin:auto;  text-align: center;');
+        a.setAttribute('id', 'container');
+        a.setAttribute('class', 'jumbotron');
+        b.id = urlParams.divid;
+        document.body.appendChild(a);
+        a.appendChild(b);
+    };
+</script>
+<br><br><br>
+<ul class="list-group">
+  <script type="text/javascript">
+      if(utils.getQueryStringParams()["account"])
+      {
+          document.writeln('<li class="list-group-item list-group-item-info">Account#: ' + utils.getQueryStringParams()["account"] + '</li>');
+      }
+      if(utils.getQueryStringParams()["divid"])
+      {
+          document.writeln('<li class="list-group-item list-group-item-info">DIV ID: ' + utils.getQueryStringParams()["divid"] + '</li>');
+      }
+      if(utils.getQueryStringParams()["appid"])
+      {
+          document.writeln('<li class="list-group-item list-group-item-info">app_ID: ' + utils.getQueryStringParams()["appid"] + '</li>');
+      }
+      if(utils.getQueryStringParams()["containsurl"])
+      {
+          document.writeln('<li class="list-group-item list-group-item-info">Contains URL: ' + utils.getQueryStringParams()["containsurl"] + '</li>');
+      }
+      if(utils.getQueryStringParams()["sect"])
+      {
+          document.writeln('<li class="list-group-item list-group-item-info">Section: ' + utils.getQueryStringParams()["sect"] + '</li>');
+      }
+      if(utils.getQueryStringParams()["sdes"])
+      {
+          document.writeln('<li class="list-group-item list-group-item-info">Enable all SDEs: ' + utils.getQueryStringParams()["sdes"] + '</li>');
+      }
+      if(utils.getQueryStringParams()["alpha"])
+      {
+          document.writeln('<li class="list-group-item list-group-item-info">Alpha Account: ' + utils.getQueryStringParams()["alpha"] + '</li>');
+      }
+  </script>
+</ul>
+</div>
+<ul class="list-group">
+  <div id="vars"></div>
+</ul>
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    $('.dropdown-inverse li > a').click(function(e){
+        $('.btnStatus').text(this.innerHTML);
+    });
+</script>
+		
+<script>
+    if (urlParams.sdes === "true") {
+        utils.waitForTag(1000, 10)
+            .then(() => {
+                window.lpTag.sdes = window.lpTag.sdes||[];
+                lpTag.sdes.push(
+                    {
+                        "type": "cart",  //MANDATORY
+                        "total": 11.7,  //TOTAL VALUE OF THE CART AFTER DISCOUNT
+                        "currency": "USD",  //CURRENCY CODE
+                        "numItems": 6,  //NUMBER OF ITEMS IN CART
+                        "products": [{
+                            "product": {
+                                "name": "prod1",  //PRODUCT NAME
+                                "category": "category",  //PRODUCT CATEGORY NAME
+                                "sku": "sku",  //PRODUCT SKU OR UNIQUE IDENTIFIER
+                                "price": 7.8  //SINGLE PRODUCT PRICE
+                            }, "quantity": 1  //NUMBER OF PRODUCTS
+                        }]
+                    }
+                );
+                lpTag.sdes.push(
+                    {
+                        "type": "purchase",  //MANDATORY
+                        "total": 11.7,  //TOTAL VALUE OF THE TRANSACTION AFTER DISCOUNT
+                        "currency": "USD",  //CURRENCY CODE
+                        "orderId": "DRV1534XC",  //UNIQUE ORDER ID OR RECEIPT ID
+                        "cart":{
+                            "products": [{
+                                "product": {
+                                    "name": "antivirus pro plan",  //PRODUCT NAME
+                                    "category": "software",  //PRODUCT CATEGORY NAME
+                                    "sku": "xyz001",  //PRODUCT SKU OR UNIQUE IDENTIFIER
+                                    "price": 7.8  //SINGLE PRODUCT PRICE
+                                },
+                                "quantity": 3  //QUANTITY OF THIS PRODUCT
+                            }]
+                        }
+                    }
+                );
+                lpTag.sdes.push(
+                    {
+                        "type": "prodView",  //MANDATORY
+                        "currency": "USD",  //CURRENCY CODE
+                        "products": [{  //ARRAY OF PRODUCTS
+                            "product": {
+                                "name": "red high heel shoe",  //PRODUCT NAME
+                                "category": "women shoes",  //PRODUCT CATEGORY NAME
+                                "sku": "xyz567",  //PRODUCT SKU OR UNIQUE IDENTIFIER
+                                "price": 77.8  //SINGLE PRODUCT PRICE
+                            }
+                        }]
+                    }
+                );
+                lpTag.sdes.push(
+                    {
+                        "type": "ctmrinfo",  //MANDATORY
+                        "info": {
+                            "cstatus": "cancelled",  //CUSTOMER LIFECYCLE STATUS. FROM PRE-DEFINED LIST
+                            "ctype": "vip",  //CUSTOMER TYPE OR TIER. FROM PRE-DEFINED LIST
+                            "customerId": "138766AC",  //UNIQUE CUSTOMER IDENTIFIER
+                            "balance": -400.99,  //THE CUSTOMER FINANCIAL BALANCE IN DECIMAL VALUE
+                            "currency": "USD",  //CURRENCY CODE
+                            "socialId": "11256324780",  //SOCIAL ID OF YOUR CHOICE: FACEBOOK, TWITTER ETC...
+                            "imei": "3543546543545688",  //UNIQUE DEVICE OR PHONE IDENTIFIER
+                            "userName": "user000",  //CONSUMER NICKNAME OR USERNAME
+                            "companySize": 500,  //COMPANY SIZE MEASURED BY NUMBER OF EMPLOYEES
+                            "accountName": "bank corp",  //THE CUSTOMER'S COMPANY NAME
+                            "role": "broker",  //CONSUMER ROLE TITLE
+                            "lastPaymentDate": {
+                                "day": 15,  //THE DAY OF THE LAST PAYMENT NUMERIC VALUE
+                                "month": 10,  //THE MONTH OF THE LAST PAYMENT NUMERIC VALUE
+                                "year": 2014  //THE YEAR OF THE LAST PAYMENT NUMERIC VALUE
+                            },
+                            "registrationDate": {
+                                "day": 23,  //THE DAY OF THE REGISTRATION NUMERIC VALUE
+                                "month": 5,  //THE MONTH OF THE REGISTRATION NUMERIC VALUE
+                                "year": 2013  //THE YEAR OF THE REGISTRATION NUMERIC VALUE
+                            },
+                            "storeNumber": "123865",  //STORE NUMBER
+                            "storeZipCode": "20505"  //STORE ZIP CODE
+                        }
+                    }
+                );
+                lpTag.sdes.push(
+                    {
+                        "type": "mrktInfo",  //MANDATORY
+                        "info": {
+                            "channel": "1",  //ORIGINATING CHANNEL ENUM:
+                            // 0-Direct, 1-Search, 2-Social, 3-Email, 4-Referral, 5-Paid Search, 6-Display
+                            "affiliate": "Yahoo",  //AFFILIATE NAME
+                            "campaignId": "US coupon campaign"  //EXTERNAL ORIGINATING CAMPAIGN
+                        }
+                    }
+                );
+                lpTag.sdes.push(
+                    {
+                        "type": "personal",  //MANDATORY
+                        "personal": {
+                            "firstname": "John",  // FIRST NAME
+                            "lastname": "Doe",  // SURNAME
+                            "age": {
+                                "age": 34,  // AGE AS INTEGER
+                                "year": 1980,  // BIRTH YEAR
+                                "month": 4,  // BIRTH MONTH
+                                "day": 15  // BIRTH DAY
+                            },
+                            "contacts": [{
+                                "email": "myname@example.com",  // EMAIL
+                                "phone": "+1 212-788-8877"  // PHONE NUMBER
+                            }],
+                            "gender": "MALE",  // MALE, FEMALE, OTHER
+                            "language": "en-US",  // LANGUAGE
+                            "company": "company"  // VISITOR COMPANY NAME
+                        }
+                    }
+                );
+                lpTag.sdes.push(
+                    {
+                        "type": "lead",  //MANDATORY
+                        "lead": {
+                            "topic": "luxury car test drive 2015",  //TOPIC OR NAME OF A SUBMITTED LEAD
+                            "value": 22.22,  //EVALUATED VALUE OF THE LEAD
+                            "currency": "USD",  //CURRENCY CODE
+                            "leadId": "xyz123"  //LEAD IDENTIFIER OR TICKET ID
+                        }
+                    }
+                );
+                lpTag.sdes.push(
+                    {
+                        "type": "service",  //MANDATORY
+                        "service": {
+                            "topic": "order checkbook",  // SERVICE ACTIVITY TOPIC OR NAME
+                            "status": 0,  // STATUS ENUM
+                            // 0-Complete, 1-In Progress, 2-Approved, 3-cancelled, 4-Not Approved,
+                            // 5-Reviewed, 6-Missing Details, 7-Closed, 8-Removed, 9-Assigned,
+                            // 10-Waiting for Customer Response, 11-Waiting for Response, 12-Pending, 13-Resolved
+                            "category": "finance",  // SERVICE CATEGORY NAME
+                            "serviceId": "service12"  // SERVICE UNIQUE IDENTIFIER OR TICKET ID
+                        }
+                    }
+                );
+                lpTag.sdes.push(
+                    {
+                        "type": "error",  //MANDATORY
+                        "error": {
+                            "message": "Expiration date missing",  // THE ERROR MESSAGE
+                            "code": "er100004"  // THE ERROR CODE
+                        }
+                    }
+                );			
+                let sdeDiv = document.createElement('div');
+                sdeDiv.setAttribute('style','border:0px solid black;')
+                sdeDiv.setAttribute('id', 'container');
+                sdeDiv.setAttribute('class', 'jumbotron');
+                document.body.appendChild(sdeDiv);
+                sdeDivHeader = document.createElement('h3');
+                sdeDivHeader.innerText = "These SDEs were passed";
+                sdeDivText = document.createElement('pre');
+                utils.waitForSDEGet(1000,10).then(()=>{
+                    sdeDivText.innerText = JSON.stringify(lpTag.sdes.get(), null, 2);
+                    sdeDiv.appendChild(sdeDivHeader);
+                    sdeDiv.appendChild(sdeDivText);
+                }).catch(e=>{console.error(e);})
+
+            })
+            .catch(e => {console.error(e);})
+    }
+</script>
 </body>
 </html>
